@@ -8,7 +8,8 @@
   });
 
   var backgroundLayer = game.createLayer('background');
-
+  var mario = backgroundLayer.createEntity();
+  
   game.run();
 
 })()

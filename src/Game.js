@@ -17,44 +17,10 @@ Pixel.Game.prototype.createLayer = function (name) {
   return layer;
 };
 
-/*
 Pixel.Game.prototype.run = function (callback) {
     var loading = this._layerKeys.length;
     for (var k = 0; k < this._layerKeys.length; k++) {
-        this._layers[this._layerKeys[k]].load(function () {
-            loading -= 1;
-            if (loading === 0) {
-                callback();
-            }
-        });
+        this._layers[this._layerKeys[k]].render();
     }
     return this;
-};
-*/
-
-Pixel.Game.prototype.run = function () {
-
-  var container = this.scene.container;
-  var canvas = document.createElement('canvas');
-  canvas.width = this.scene.width;
-  canvas.height = this.scene.width;
-
-  var context = canvas.getContext('2d');
-  context.beginPath();
-  context.rect(0, 0, canvas.width, canvas.height);
-  context.fillStyle = "blue";
-  context.fill();
-
-  container.appendChild(canvas);
-
-  var image = new Image();
-  image.src = Pixel.asset + '/sprites/' + 'mario.png';
-
-  //we use an event listener to be sure that the image has been loaded
-  image.addEventListener('load', function() {
-    context.drawImage(image, 100, 100);
-  }, false);
-
-  console.log(context);
-
 };
