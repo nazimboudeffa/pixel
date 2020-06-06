@@ -7,6 +7,7 @@ gulp.task('scripts', function() {
     'src/Game.js',
     'src/Layer.js',
     'src/Entity.js',
+    'src/Pixel.js',
     'src/Tile.js'
     ])
     .pipe(concat('pixel.js'))

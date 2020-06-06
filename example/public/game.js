@@ -8,8 +8,11 @@
   });
 
   var backgroundLayer = game.createLayer('background');
-  var player = backgroundLayer.createEntity();
+  var mario = backgroundLayer.createEntity();
+  mario.posistion = { x: 0, y: 0 };
+  mario.asset = new Pixel.Sprite({name: 'mario.png'});
 
+  game.load();
   game.run();
 
 })()

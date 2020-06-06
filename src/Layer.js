@@ -11,6 +11,14 @@ Pixel.Layer.prototype.createEntity = function () {
     return entity;
 };
 
+Pixel.Layer.prototype.load = function () {
+    for (var i = 0; i < this.components.length; i++) {
+        var c = this.components[i];
+        c.load();
+    }
+    return this;
+};
+
 Pixel.Layer.prototype.render = function(){
   var container = this.game.scene.container;
   this.canvas = document.createElement('canvas');
@@ -28,3 +36,10 @@ Pixel.Layer.prototype.render = function(){
   }
   return this;
 }
+
+Pixel.Layer.prototype.update = function(elapsedTime, dt) {
+    for (var i = 0; i < this._components.length; i++) {
+        this._components[i].update(elapsedTime, dt);
+    }
+    return this;
+};

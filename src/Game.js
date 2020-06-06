@@ -17,6 +17,13 @@ Pixel.Game.prototype.createLayer = function (name) {
   return layer;
 };
 
+Pixel.Game.prototype.load = function () {
+    for (var k = 0; k < this._layerKeys.length; k++) {
+        this._layers[this._layerKeys[k]].load();
+    }
+    return this;
+};
+
 Pixel.Game.prototype.run = function (callback) {
     var loading = this._layerKeys.length;
     for (var k = 0; k < this._layerKeys.length; k++) {

@@ -2,9 +2,10 @@ var Pixel = {
     Game: function () { },
     Layer: function () { },
     Entity: function () { },
+    Sprite: function () { },
     Tile: function () { },
 
-    asset: 'assets',
+    path: 'assets',
 
     Keys: {
         Space: 32,
