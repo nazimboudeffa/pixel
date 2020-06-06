@@ -36,10 +36,15 @@ Pixel.Game.prototype.run = function () {
 
   var container = this.scene.container;
   var canvas = document.createElement('canvas');
-  canvas.width = 400;
-  canvas.height = 300;
+  canvas.width = this.scene.width;
+  canvas.height = this.scene.width;
 
   var context = canvas.getContext('2d');
+  context.beginPath();
+  context.rect(0, 0, canvas.width, canvas.height);
+  context.fillStyle = "blue";
+  context.fill();
+
   container.appendChild(canvas);
 
   var image = new Image();

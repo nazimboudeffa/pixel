@@ -162,10 +162,15 @@ Pixel.Game.prototype.run = function () {
 
   var container = this.scene.container;
   var canvas = document.createElement('canvas');
-  canvas.width = 400;
-  canvas.height = 300;
+  canvas.width = this.scene.width;
+  canvas.height = this.scene.width;
 
   var context = canvas.getContext('2d');
+  context.beginPath();
+  context.rect(0, 0, canvas.width, canvas.height);
+  context.fillStyle = "blue";
+  context.fill();
+
   container.appendChild(canvas);
 
   var image = new Image();
@@ -245,6 +250,16 @@ Pixel.Entity = function (layer) {
     this.layer = layer;
     this.pos = { x: 0, y: 0 };
 };
+
+Pixel.Entity.prototype.render = function (){
+  var image = new Image();
+  image.src = Pixel.asset + '/sprites/' + 'mario.png';
+
+  //we use an event listener to be sure that the image has been loaded
+  image.addEventListener('load', function() {
+    this.layer._ctx.drawImage(image, 100, 100);
+  }, false);
+}
 
 Pixel.Tile = function () {
     "use strict";
