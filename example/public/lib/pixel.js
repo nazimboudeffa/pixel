@@ -151,7 +151,7 @@ Pixel.Game.prototype.load = function () {
     return this;
 };
 
-Pixel.Game.prototype.run = function (callback) {
+Pixel.Game.prototype.render = function (callback) {
     var loading = this._layerKeys.length;
     for (var k = 0; k < this._layerKeys.length; k++) {
         this._layers[this._layerKeys[k]].render();
@@ -181,7 +181,6 @@ Pixel.Layer.prototype.load = function () {
 };
 
 Pixel.Layer.prototype.render = function(){
-  var container = this.game.scene.container;
   this.canvas = document.createElement('canvas');
   this.canvas.width = this.game.scene.width;
   this.canvas.height = this.game.scene.width;
@@ -190,17 +189,17 @@ Pixel.Layer.prototype.render = function(){
   this.context.rect(0, 0, this.canvas.width, this.canvas.height);
   this.context.fillStyle = "blue";
   this.context.fill();
-  container.appendChild(this.canvas);
+  this.game.scene.container.appendChild(this.canvas);
   for (var i = 0; i < this.components.length; i++) {
       var c = this.components[i];
-      c.render();
+      c.draw();
   }
   return this;
 }
 
 Pixel.Layer.prototype.update = function(elapsedTime, dt) {
-    for (var i = 0; i < this._components.length; i++) {
-        this._components[i].update(elapsedTime, dt);
+    for (var i = 0; i < this.components.length; i++) {
+        this.components[i].update(elapsedTime, dt);
     }
     return this;
 };
@@ -210,30 +209,25 @@ Pixel.Entity = function (layer) {
   this.asset = undefined;
   this.image = new Image();
   this.position = { x: 0, y: 0 };
+  this.loaded = false;
 };
-
-Pixel.Entity.prototype.render = function (){
-  var layer = this.layer;
-  var image = new Image();
-  image.src = Pixel.path + '/sprites/' + 'mario.png';
-  //we use an event listener to be sure that the image has been loaded
-  image.addEventListener('load', function() {
-    layer.context.drawImage(image, 100, 100);
-  }, false);
-}
 
 Pixel.Entity.prototype.load = function (){
   var self = this;
   this.image.src = Pixel.path + '/sprites/' + 'mario.png';
-  this.image.onload = function () {
-      self.image.onload = undefined;
-      self.loaded = true;
-  };
+  //we use an event listener to be sure that the image has been loaded
+  this.image.addEventListener('load', function() {
+    //self.layer.context.drawImage(self.image, 100, 100);
+    self.loaded = true;
+  }, false);
   return this;
 }
 
 Pixel.Entity.prototype.draw = function() {
-    this.asset.draw(this);
+    //this.asset.draw(this);
+    if (this.loaded){
+      this.layer.context.drawImage(this.image, 200, 100);
+    }
     return this;
 };
 

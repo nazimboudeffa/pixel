@@ -13,6 +13,6 @@
   mario.asset = new Pixel.Sprite({name: 'mario.png'});
 
   game.load();
-  game.run();
+  game.render();
 
 })()

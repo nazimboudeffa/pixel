@@ -24,7 +24,7 @@ Pixel.Game.prototype.load = function () {
     return this;
 };
 
-Pixel.Game.prototype.run = function (callback) {
+Pixel.Game.prototype.render = function (callback) {
     var loading = this._layerKeys.length;
     for (var k = 0; k < this._layerKeys.length; k++) {
         this._layers[this._layerKeys[k]].render();

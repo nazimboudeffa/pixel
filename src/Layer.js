@@ -20,7 +20,6 @@ Pixel.Layer.prototype.load = function () {
 };
 
 Pixel.Layer.prototype.render = function(){
-  var container = this.game.scene.container;
   this.canvas = document.createElement('canvas');
   this.canvas.width = this.game.scene.width;
   this.canvas.height = this.game.scene.width;
@@ -29,17 +28,17 @@ Pixel.Layer.prototype.render = function(){
   this.context.rect(0, 0, this.canvas.width, this.canvas.height);
   this.context.fillStyle = "blue";
   this.context.fill();
-  container.appendChild(this.canvas);
+  this.game.scene.container.appendChild(this.canvas);
   for (var i = 0; i < this.components.length; i++) {
       var c = this.components[i];
-      c.render();
+      c.draw();
   }
   return this;
 }
 
 Pixel.Layer.prototype.update = function(elapsedTime, dt) {
-    for (var i = 0; i < this._components.length; i++) {
-        this._components[i].update(elapsedTime, dt);
+    for (var i = 0; i < this.components.length; i++) {
+        this.components[i].update(elapsedTime, dt);
     }
     return this;
 };
