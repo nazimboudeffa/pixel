@@ -8,19 +8,18 @@ Pixel.Entity = function (layer) {
 
 Pixel.Entity.prototype.load = function (){
   var self = this;
-  this.image.src = Pixel.path + '/sprites/' + 'mario.png';
+  self.loaded = true;
   //we use an event listener to be sure that the image has been loaded
-  this.image.addEventListener('load', function() {
-    //self.layer.context.drawImage(self.image, 100, 100);
-    self.loaded = true;
-  }, false);
+  this.image.addEventListener('load', this.draw(), false);
+  this.image.src = Pixel.path + '/sprites/' + 'mario.png';
   return this;
 }
 
 Pixel.Entity.prototype.draw = function() {
     //this.asset.draw(this);
+    console.log(this.loaded);
     if (this.loaded){
-      this.layer.context.drawImage(this.image, 200, 100);
+      this.layer.context.drawImage(this.image, 0, 0, 32, 32, 100, 100, 32, 32);
     }
     return this;
 };

@@ -1,13 +1,18 @@
 Pixel.Game = function(){
-  this.scene = { container: undefined, width: 0, height: 0 };
 }
 
-Pixel.Game.prototype.init = function (container) {
-  this.scene.container = document.getElementById(container.id);
-  this.scene.width = container.width;
-  this.scene.height = container.height;
+Pixel.Game.prototype.init = function (width, height, container, state) {
+  this.width = container.width;
+  this.height = container.height;
+  this.container = document.getElementById(container.id);
+  this.state = null;
+  this.cache = null;
   this._layerKeys = [];
   this._layers = {};
+}
+
+Pixel.Game.prototype.run = function () {
+  
 }
 
 Pixel.Game.prototype.createLayer = function (name) {
