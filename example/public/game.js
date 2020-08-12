@@ -14,6 +14,9 @@
   mario.posistion = { x: 0, y: 0 };
   mario.asset = new Pixel.Sprite({name: 'mario.png'});
 */
+
+  game.load(["assets/sprites/mario.png"]);
+
   game.run();
 
 })()
